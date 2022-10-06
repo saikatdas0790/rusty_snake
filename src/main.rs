@@ -20,5 +20,5 @@ fn init(width: u32, height: u32) -> (Canvas<Window>, EventPump) {
 }
 
 fn main() {
-    println!("Hello, world!");
+    let (canvas, events) = init(720, 720);
 }
