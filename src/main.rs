@@ -20,5 +20,14 @@ fn init(width: u32, height: u32) -> (Canvas<Window>, EventPump) {
 }
 
 fn main() {
-    let (canvas, events) = init(720, 720);
+    let (canvas, mut events) = init(720, 720);
+
+    loop {
+        for event in events.poll_iter() {
+            match event {
+                sdl2::event::Event::Quit { .. } => return,
+                _ => {}
+            }
+        }
+    }
 }
