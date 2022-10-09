@@ -35,7 +35,12 @@ fn display_rectangle(renderer: &mut Canvas<Window>, canvas_width: &u32, canvas_h
     renderer.set_draw_color(drawing_color);
 
     let square_definition = Rect::new(0, 0, *canvas_width, *canvas_height);
-    renderer.fill_rect(square_definition).ok();
+    let square = renderer.fill_rect(square_definition);
+
+    match square {
+        Ok(()) => {}
+        Err(error) => println!("{}", error),
+    }
 
     renderer.present();
 }
