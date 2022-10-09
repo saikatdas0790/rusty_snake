@@ -1,7 +1,8 @@
 use std::{thread, time::Duration};
 
 use sdl2::{
-    event::Event, keyboard::Keycode, pixels::Color, render::Canvas, video::Window, EventPump,
+    event::Event, keyboard::Keycode, pixels::Color, rect::Rect, render::Canvas, video::Window,
+    EventPump,
 };
 
 fn init(width: u32, height: u32) -> (Canvas<Window>, EventPump) {
@@ -23,8 +24,24 @@ fn init(width: u32, height: u32) -> (Canvas<Window>, EventPump) {
     (canvas, event_pump)
 }
 
+fn display_rectangle(renderer: &mut Canvas<Window>, canvas_width: &u32, canvas_height: &u32) {
+    let red: u8 = rand::random();
+    let green: u8 = rand::random();
+    let blue: u8 = rand::random();
+
+    renderer.clear();
+
+    let drawing_color = Color::RGB(red, green, blue);
+    renderer.set_draw_color(drawing_color);
+
+    let square_definition = Rect::new(0, 0, *canvas_width, *canvas_height);
+    renderer.fill_rect(square_definition).ok();
+
+    renderer.present();
+}
+
 fn main() {
-    let (canvas, mut events) = init(720, 720);
+    let (mut canvas, mut events) = init(720, 720);
 
     thread::spawn(move || {});
 
@@ -39,6 +56,8 @@ fn main() {
                 _ => continue 'game,
             }
         }
+
+        display_rectangle(&mut canvas, &720, &720);
 
         thread::sleep(Duration::from_millis(800));
     }
