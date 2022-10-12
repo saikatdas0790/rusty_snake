@@ -1,4 +1,7 @@
 use sdl2::{pixels::Color, rect::Rect, render::Canvas, video::Window, EventPump};
+use types::Grid;
+
+pub mod types;
 
 pub fn init(width: u32, height: u32) -> (Canvas<Window>, EventPump) {
     let sdl_context = sdl2::init().unwrap();
@@ -38,4 +41,22 @@ pub fn display_rectangle(renderer: &mut Canvas<Window>, canvas_width: &u32, canv
     }
 
     renderer.present();
+}
+
+pub fn grid_init(nx_cells: u32, ny_cells: u32) -> Grid {
+    let mut grid_vector = Vec::new();
+
+    for row in 0..ny_cells {
+        grid_vector.push(Vec::new());
+        for _column in 0..nx_cells {
+            grid_vector[row as usize].push(types::Cell {
+                red: 35,
+                green: 15,
+                blue: 13,
+            });
+        }
+    }
+    let grid = Grid { grid: grid_vector };
+
+    grid
 }
