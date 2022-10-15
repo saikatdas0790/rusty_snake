@@ -1,6 +1,7 @@
 use sdl2::{pixels::Color, rect::Rect, render::Canvas, video::Window, EventPump};
 use types::Grid;
 
+pub mod snake;
 pub mod types;
 
 pub fn init(width: u32, height: u32) -> (Canvas<Window>, EventPump) {
