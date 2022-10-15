@@ -7,7 +7,11 @@ pub mod lib;
 fn main() {
     let (mut canvas, mut events) = init(720, 720);
 
-    let mut grid = grid_init(columns, rows);
+    let columns = 100;
+    let rows = 100;
+    let cell_width = 7;
+
+    let mut grid = lib::grid_init(columns, rows);
 
     thread::spawn(move || {});
 
@@ -23,7 +27,7 @@ fn main() {
             }
         }
 
-        display_rectangle(&mut canvas, &720, &720);
+        lib::display_frame(&mut canvas, &grid, &columns, &rows, &cell_width);
 
         thread::sleep(Duration::from_millis(800));
     }
